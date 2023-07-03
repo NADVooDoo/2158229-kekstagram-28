@@ -1,5 +1,3 @@
-import { getPhotos } from './data.js';
-
 const photosContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
@@ -14,7 +12,8 @@ const renderThumbnail = (({ url, description, likes, comments, id }) => {
   return thumbnail;
 });
 
-const createThumbnailsList = (thumbnails) => {
+const renderThumbnails = (thumbnails) => {
+  photosContainer.querySelectorAll('.picture').forEach((element) => element.remove());
   const thumbnailsListFragment = document.createDocumentFragment();
 
   thumbnails.forEach((thumbnail) => {
@@ -22,8 +21,5 @@ const createThumbnailsList = (thumbnails) => {
   });
   photosContainer.append(thumbnailsListFragment);
 };
-
-const renderThumbnails = getPhotos();
-createThumbnailsList(renderThumbnails);
 
 export { renderThumbnails };

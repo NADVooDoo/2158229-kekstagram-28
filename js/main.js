@@ -1,2 +1,17 @@
-import './big-photo.js';
-import './form.js';
+import { getData } from './api.js';
+import { showAlert } from './util.js';
+import { createGallery } from './gallery.js';
+import { onPhotoUploadFormSubmit, onClosePhotoUploadForm } from './form.js';
+import { showFilters, setFilterClickHandler } from './filter.js';
+
+getData()
+  .then((pictures) => {
+    createGallery(pictures);
+    showFilters();
+    setFilterClickHandler(pictures);
+  })
+  .catch((err) => {
+    showAlert(err.message);
+  });
+
+onPhotoUploadFormSubmit(onClosePhotoUploadForm);
